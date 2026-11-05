@@ -1,3 +1,5 @@
+.env
 .idea/
 dist/
 ics-redact-proxy
+.DS_Store

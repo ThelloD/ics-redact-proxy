@@ -1,0 +1,13 @@
+services:
+  ics-redact-proxy:
+    #image: ghcr.io/gabe565/ics-redact-proxy:latest
+    image: localhost/ics-redact-proxy:latest
+    build: .
+    container_name: ics-redact-proxy
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - path: ./.env
+        required: false
+
