@@ -135,7 +135,16 @@ func Filter(conf *config.Config, out *bytes.Buffer, in io.Reader) error { //noli
 
 				_ = co.SerializeTo(out, serializeConfig)
 			default:
-				return fmt.Errorf("%w: expected begin or end", ErrMalformed)
+				// return fmt.Errorf(
+				// 	"%w: expected begin or end, got %q with value %q",
+				// 	ErrMalformed,
+				// 	line.IANAToken,
+				// 	line.Value,
+				// )
+
+				// Ignore calendar-level properties that occur after components.
+				// Some real-world ICS producers emit these out of the usual order.
+				continue
 			}
 		case stateEnd:
 			return fmt.Errorf("%w: unexpected end", ErrMalformed)
